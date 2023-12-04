@@ -15,7 +15,7 @@ import LoggedOutCard from "./LoggedOutCard";
 let userDts: userDetailsType = {loggedIn: 'no'}
 try {
     const cached_user_dts  = window.localStorage.getItem('userDts') // the user details stored to the localStorage whenever a user logs in
-    
+
     if (cached_user_dts) {
         // const cached_user_parsed = JSON.parse(cached_user_dts) as unknown as userDetailsType
         const cached_user_parsed = JSON.parse(cached_user_dts)
@@ -35,6 +35,7 @@ function run_access_token_health_check () {
 
         // if true, then it means the accessToken has expired and the refreshToken has also expired
         if (re.data.msg === 'bad' && re.data.action === 'logout') {
+            localStorage.removeItem('userDts')
             location.href = '/logout'
             return true;
         }
@@ -58,7 +59,6 @@ try {
         const hourDiff = (currentDate - storedDate) / (1000 * 60 * 60); // converts the difference to hours.. since i want to know if the last check has been older than an 24hours
     
         if (hourDiff >= 24 && userDts.loggedIn === 'yes') {
-            // console.log('time for use to check for a new accessToken', hourDiff)
             run_access_token_health_check()
         }
     } else {

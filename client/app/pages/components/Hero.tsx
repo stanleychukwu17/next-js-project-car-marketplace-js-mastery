@@ -6,6 +6,7 @@ import Image from "next/image"
 
 import hero from "@/public/assets/hero.png"
 import heroBg from "@/public/assets/hero-bg.png"
+import Button from "@/app/components/Button/Button"
 
 
 export default function Hero() {
@@ -39,6 +40,9 @@ export default function Hero() {
                         <Image src={hero} alt="" />
                     </div>
                 </div>
+            </div>
+            <div className="mt-5">
+                <Button text="Explore cars" />
             </div>
         </section>
     )

@@ -6,10 +6,12 @@ import { useAppSelector, useAppDispatch } from "../../redux/hook";
 import { updateUser, userDetailsType } from "../../redux/features/userSlice";
 import { BACKEND_PORT as backEndPort } from "@/my.config";
 import Link from "next/link";
+import Image from "next/image";
 
 import LoggedInCard from "./LoggedInCard";
 import LoggedOutCard from "./LoggedOutCard";
 
+import car_logo from "@/public/assets/logo.svg"
 
 //--START-- checks to see if there are any stored information about the user in the user's localStorage space
 let userDts: userDetailsType = {loggedIn: 'no'}
@@ -88,9 +90,11 @@ export default function Header() {
 
 
     return (
-        <header className="flex justify-between items-center py-5 px-5 bg-[#e9f2ff]">
+        <header className="flex justify-between items-center py-3 px-5 ">
             <div className="text-2xl font-bold">
-                <Link href="/">NEXT.</Link>
+                <Link href="/">
+                    <Image src={car_logo}alt="CarHub" width={100} />
+                </Link>
             </div>
             {userInfo.loggedIn === 'no' && <LoggedOutCard />}
             {userInfo.loggedIn === 'yes' && <LoggedInCard />}
